@@ -3,7 +3,7 @@
 
   const PHONE = '436644284016';
   const EMAIL = 'admirisufi1@icloud.com';
-  const DEFAULT_MESSAGE = 'Hallo, ich interessiere mich für Ihre Gartenpflege- und Entrümpelungsservices. Können Sie mir bitte weitere Informationen geben?';
+  const DEFAULT_MESSAGE = 'Hallo, ich interessiere mich für Ihre Gartenpflege- und Entrümpellungsservices. Können Sie mir bitte weitere Informationen geben?';
 
   const waLink = (text) => `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
 
@@ -117,6 +117,31 @@
         status.append(fallback);
       }
     }
+  });
+
+  // Hero e-mail button: pick a service, then continue in the contact form
+  const mailToggle = document.querySelector('.btn-mail');
+  const picker = document.getElementById('service-picker');
+  const setPicker = (open) => {
+    mailToggle.setAttribute('aria-expanded', String(open));
+    picker.hidden = !open;
+  };
+  mailToggle.addEventListener('click', () => setPicker(picker.hidden));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !picker.hidden) { setPicker(false); mailToggle.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!picker.hidden && !e.target.closest('.hero-mail')) setPicker(false);
+  });
+  picker.addEventListener('click', (e) => {
+    const pick = e.target.closest('.pick');
+    if (!pick) return;
+    setPicker(false);
+    fields.service.value = pick.dataset.pick;
+    status.classList.remove('is-error');
+    status.textContent = `Leistung „${pick.dataset.pick}“ ausgewählt. Ergänzen Sie Ihre Daten und tippen Sie auf „Per E-Mail senden“.`;
+    document.getElementById('kontakt').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    fields.name.focus({ preventScroll: true });
   });
 
   const year = document.getElementById('year');

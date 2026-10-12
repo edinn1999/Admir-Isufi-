@@ -1,4 +1,4 @@
-# Admir Isufi – Garten & Entrümpelung
+# Admir Isufi – Garten & Entrümpellung
 
 Statische One-Page-Website (HTML, CSS, JavaScript – ohne Build-Schritt).
 
