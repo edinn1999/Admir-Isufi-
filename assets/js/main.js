@@ -106,8 +106,16 @@
       window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
       status.textContent = 'Ihr E-Mail-Programm wird geöffnet. Bitte senden Sie die Nachricht dort ab.';
     } else {
-      window.open(waLink(text), '_blank', 'noopener');
-      status.textContent = 'WhatsApp wird geöffnet. Bitte senden Sie die Nachricht dort ab.';
+      const win = window.open(waLink(text), '_blank', 'noopener');
+      status.textContent = 'WhatsApp wird geöffnet. Bitte senden Sie die Nachricht dort ab. ';
+      if (!win) {
+        const fallback = document.createElement('a');
+        fallback.href = waLink(text);
+        fallback.target = '_blank';
+        fallback.rel = 'noopener';
+        fallback.textContent = 'Falls nichts passiert: hier tippen.';
+        status.append(fallback);
+      }
     }
   });
 
