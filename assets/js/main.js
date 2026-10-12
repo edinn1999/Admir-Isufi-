@@ -144,6 +144,17 @@
     fields.name.focus({ preventScroll: true });
   });
 
+  // Google Maps loads only after the visitor agrees (DSGVO)
+  const map = document.querySelector('.map');
+  document.getElementById('map-load')?.addEventListener('click', () => {
+    const frame = document.createElement('iframe');
+    frame.src = map.dataset.src;
+    frame.title = 'Karte: Im Breinfeld 12, 4531 Neuhofen an der Krems';
+    frame.loading = 'lazy';
+    frame.referrerPolicy = 'no-referrer-when-downgrade';
+    map.replaceChildren(frame);
+  });
+
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
