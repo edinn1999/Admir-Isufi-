@@ -281,7 +281,27 @@ p { margin: 0; }
 .pick:hover { background: var(--spring); border-color: var(--spring); color: var(--forest-950); }
 .hero-curve {
   position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(40px, 7vw, 110px);
-  fill: var(--white);
+  fill: var(--forest-900);
+}
+
+/* ---------- Ticker (moving band of services) ---------- */
+.ticker { background: var(--forest-900); color: var(--white); overflow: hidden; padding-block: 6px 26px; }
+.ticker-track { display: flex; width: max-content; }
+.ticker-list { display: flex; flex: none; align-items: center; }
+.ticker-list li {
+  display: inline-flex; align-items: center; gap: clamp(20px, 3vw, 36px); padding-right: clamp(20px, 3vw, 36px);
+  font: 600 clamp(1.25rem, 1rem + 1vw, 1.75rem)/1.2 var(--font-display); letter-spacing: -0.01em; white-space: nowrap;
+}
+.ticker-list .icon { width: .9em; height: .9em; color: var(--spring); }
+@media (prefers-reduced-motion: no-preference) {
+  .ticker-track { animation: ticker 45s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+}
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { width: auto; justify-content: center; padding-inline: var(--gutter); }
+  .ticker-list { flex-wrap: wrap; justify-content: center; row-gap: 8px; }
+  .ticker-list--clone { display: none; }
 }
 
 /* Hero load sequence – the one orchestrated moment on the page */
