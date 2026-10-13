@@ -18,6 +18,45 @@
     if (service) link.setAttribute('aria-label', `${service} per WhatsApp anfragen`);
   });
 
+  // Hero video: soft fade at the loop point, pause button, no autoplay with reduced motion
+  const video = document.querySelector('.hero-video');
+  const videoToggle = document.querySelector('.video-toggle');
+  if (video && videoToggle) {
+    let userPaused = false;
+    const setPaused = (paused) => {
+      videoToggle.setAttribute('aria-pressed', String(paused));
+      videoToggle.setAttribute('aria-label', paused ? 'Video abspielen' : 'Video pausieren');
+    };
+    const play = () => video.play().then(() => setPaused(false)).catch(() => setPaused(true));
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      userPaused = true;
+      video.removeAttribute('autoplay');
+      video.pause();
+      setPaused(true);
+    } else {
+      play();
+    }
+
+    videoToggle.addEventListener('click', () => {
+      userPaused = !video.paused;
+      if (userPaused) { video.pause(); setPaused(true); } else { play(); }
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (!video.duration) return;
+      if (video.duration - video.currentTime < 0.55) video.classList.add('is-fading');
+      else if (video.currentTime > 0.1 && video.currentTime < 0.6) video.classList.remove('is-fading');
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        if (userPaused) return;
+        if (entry.isIntersecting) play(); else video.pause();
+      }).observe(video);
+    }
+  }
+
   // Mobile navigation
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');

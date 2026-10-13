@@ -15,8 +15,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/img/hero.webp" media="(min-width: 700px)">
-  <link rel="preload" as="image" href="assets/img/hero-mobile.webp" media="(max-width: 699px)">
+  <link rel="preload" as="image" href="assets/img/hero-video-poster.webp">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script type="application/ld+json">
   {
@@ -52,6 +51,8 @@
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
     <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
     <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
@@ -114,10 +115,17 @@
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-title">
-    <picture class="hero-media">
-      <source media="(max-width: 699px)" srcset="assets/img/hero-mobile.webp">
-      <img src="assets/img/hero.webp" width="1672" height="941" alt="Gepflegter Garten in der Abendsonne mit frisch gemähtem Rasen, Hortensien und Rasenmäher vor einem Einfamilienhaus" fetchpriority="high">
-    </picture>
+    <div class="hero-media">
+      <img class="hero-poster" src="assets/img/hero-video-poster.webp" width="834" height="1112" alt="" fetchpriority="high">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-video-poster.webp" aria-label="Video: Ein Gärtner mäht den Rasen vor einem Einfamilienhaus in der Abendsonne">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+        <source src="assets/video/hero.webm" type="video/webm">
+      </video>
+    </div>
+    <button class="video-toggle" type="button" aria-pressed="false" aria-label="Video pausieren">
+      <svg class="icon icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+      <svg class="icon icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+    </button>
     <div class="container hero-content">
       <h1 id="hero-title" class="hero-title">
         <span>Ihr Garten.</span>
