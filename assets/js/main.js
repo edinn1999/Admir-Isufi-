@@ -57,6 +57,20 @@
     }
   }
 
+  // Section videos: pause while off screen, soft fade at the loop point
+  document.querySelectorAll('.section-video').forEach((v) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); return; }
+    v.play().catch(() => {});
+    v.addEventListener('timeupdate', () => {
+      if (!v.duration) return;
+      if (v.duration - v.currentTime < 0.5) v.classList.add('is-fading');
+      else if (v.currentTime > 0.1 && v.currentTime < 0.6) v.classList.remove('is-fading');
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); }).observe(v);
+    }
+  });
+
   // Mobile navigation
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');
