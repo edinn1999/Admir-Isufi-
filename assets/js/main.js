@@ -57,17 +57,6 @@
     }
   }
 
-  // Section videos play only while visible (and never with reduced motion)
-  const lazyVideos = document.querySelectorAll('.lazy-video');
-  if (lazyVideos.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const vio = new IntersectionObserver((entries) => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (isIntersecting) target.play().catch(() => {}); else target.pause();
-      });
-    }, { threshold: 0.35 });
-    lazyVideos.forEach((v) => vio.observe(v));
-  }
-
   // Mobile navigation
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');

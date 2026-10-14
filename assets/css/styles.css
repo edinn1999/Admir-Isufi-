@@ -377,8 +377,9 @@ p { margin: 0; }
 }
 .group-icon .icon { width: 28px; height: 28px; }
 
-.group-video { margin: 0 0 28px; border-radius: var(--radius-lg); overflow: hidden; background: var(--forest-900); box-shadow: var(--shadow-card); }
-.group-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.group-photo { margin: 0 0 28px; border-radius: var(--radius-lg); overflow: hidden; background: var(--moss-100); box-shadow: var(--shadow-card); }
+.group-photo img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 55%; }
+@media (max-width: 700px) { .group-photo img { aspect-ratio: 16 / 9; } }
 .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .card-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1080px) { .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
