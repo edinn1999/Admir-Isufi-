@@ -3,7 +3,7 @@
 
   const PHONE = '436644284016';
   const EMAIL = 'admirisufi1@icloud.com';
-  const DEFAULT_MESSAGE = 'Hallo, ich interessiere mich für Ihre Gartenpflege- und Entrümpellungsservices. Können Sie mir bitte weitere Informationen geben?';
+  const DEFAULT_MESSAGE = 'Hallo, ich interessiere mich für Ihre Gartenpflege- und Entrümpelungsservices. Können Sie mir bitte weitere Informationen geben?';
 
   const waLink = (text) => `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
 
@@ -55,6 +55,17 @@
         if (entry.isIntersecting) play(); else video.pause();
       }).observe(video);
     }
+  }
+
+  // Section videos play only while visible (and never with reduced motion)
+  const lazyVideos = document.querySelectorAll('.lazy-video');
+  if (lazyVideos.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const vio = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) target.play().catch(() => {}); else target.pause();
+      });
+    }, { threshold: 0.35 });
+    lazyVideos.forEach((v) => vio.observe(v));
   }
 
   // Mobile navigation

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Admir Isufi – Garten & Entrümpellung
+   Admir Isufi – Garten & Entrümpelung
    ========================================================================== */
 
 @font-face {
@@ -377,6 +377,8 @@ p { margin: 0; }
 }
 .group-icon .icon { width: 28px; height: 28px; }
 
+.group-video { margin: 0 0 28px; border-radius: var(--radius-lg); overflow: hidden; background: var(--forest-900); box-shadow: var(--shadow-card); }
+.group-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .card-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1080px) { .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -467,6 +469,8 @@ p { margin: 0; }
 .pair-img img { width: 100%; height: 100%; aspect-ratio: 6 / 5; object-fit: cover; transition: transform 900ms var(--ease-out); }
 .pair-img:hover img { transform: scale(1.04); }
 .pair--wide .pair-img img { aspect-ratio: 920 / 505; }
+.pair--grab .pair-img img { aspect-ratio: 8 / 7; }
+.pair--tall .pair-img img { aspect-ratio: 716 / 1016; }
 .tag {
   position: absolute; top: 14px; left: 14px;
   padding: 7px 14px; border-radius: var(--pill);
@@ -567,7 +571,7 @@ p { margin: 0; }
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Location / map ---------- */
-.location { background: var(--limestone); padding-top: 0; }
+.location { background: var(--limestone); }
 .location-grid { display: grid; grid-template-columns: 2fr 3fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
 .location-info { display: grid; gap: 24px; }
 .location-address { display: flex; gap: 14px; font-style: normal; font-size: 1.125rem; line-height: 1.5; }
